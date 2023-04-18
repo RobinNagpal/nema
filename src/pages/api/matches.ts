@@ -1,4 +1,5 @@
 import { PineconeClient, ScoredVector } from "@pinecone-database/pinecone";
+import { uniswapV3ProjectContents } from 'pages/api/contents/projects';
 
 export type Metadata = {
   url: string,
@@ -15,7 +16,8 @@ const getMatchesFromEmbeddings = async (embeddings: number[], pinecone: Pinecone
   const queryRequest = {
     vector: embeddings,
     topK,
-    includeMetadata: true
+    includeMetadata: true,
+    namespace: uniswapV3ProjectContents.namespace
   }
   try {
     const queryResult = await index.query({
